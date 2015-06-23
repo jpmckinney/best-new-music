@@ -1,5 +1,9 @@
 ## Pitchfork: Best New Music: Albums
 
+* Create a [Spotify application](https://developer.spotify.com/my-applications/#!/applications)
+* Add `http://localhost:9292/auth/spotify/callback` and the Heroku app's callback URL to the Redirect URIs
+* Remember to click "Save"
+
     heroku create
     heroku config:set SPOTIFY_CLIENT_ID=3095ac09efb0341219c195851618e656
     heroku config:set SPOTIFY_CLIENT_SECRET=fc044d1876f9792d264879ff18094eaa
