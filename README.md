@@ -3,7 +3,9 @@
 Save Pitchfork's Best New Music to your Spotify account.
 
 * Create a [Spotify application](https://developer.spotify.com/my-applications/#!/applications)
-* Add `http://localhost:9292/auth/spotify/callback` and the Heroku app's callback URL to the Redirect URIs
+* Add Redirect URIs to your Spotify application
+  * `http://localhost:9292/auth/spotify/callback`
+  * The Heroku app's callback URL
 * Remember to click "Save"
 
 ```
