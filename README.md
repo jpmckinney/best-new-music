@@ -3,12 +3,16 @@
 Save [Pitchfork](http://pitchfork.com/)'s [Best New Music](http://pitchfork.com/reviews/best/albums/) to your [Spotify](https://www.spotify.com/) account.
 
 * Create a [Spotify application](https://developer.spotify.com/my-applications/#!/applications)
-* Add Redirect URIs to your Spotify application
+* Add Redirect URIs to your Spotify application:
   * `http://localhost:9292/auth/spotify/callback`
   * The Heroku app's callback URL
 * Remember to click "Save"
 
-The application can either run locally or publicly. You can edit [`config.ru`](https://github.com/jpmckinney/best_new_music/blob/master/config.ru#L35) to instead add [Best New Tracks](http://pitchfork.com/reviews/best/tracks/) or [Best New Reissues](http://pitchfork.com/reviews/best/reissues/), or to add previous year's albums.
+The application can either run locally or publicly.
+
+You can edit [`config.ru`](https://github.com/jpmckinney/best_new_music/blob/master/config.ru#L35) to instead add [Best New Tracks](http://pitchfork.com/reviews/best/tracks/) or [Best New Reissues](http://pitchfork.com/reviews/best/reissues/), or to add previous year's albums.
+
+The application log will `WARN` if any albums can't be found on Spotify.
 
 ```
 heroku create

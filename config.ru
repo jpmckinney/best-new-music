@@ -12,6 +12,7 @@ use Rack::Session::Cookie, secret: ENV['SECRET_TOKEN']
 use OmniAuth::Strategies::Spotify, ENV['SPOTIFY_CLIENT_ID'], ENV['SPOTIFY_CLIENT_SECRET'], scope: 'playlist-modify-public user-library-modify user-read-private'
 
 helpers do
+  # @note Not used, since Spotify doesn't allow sorting playlists by album.
   def playlist
     @playlist ||= begin
       # @todo Paginate if more than 50 playlists.
