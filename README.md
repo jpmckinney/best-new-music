@@ -1,6 +1,6 @@
 ## Pitchfork: Best New Music
 
-Save Pitchfork's Best New Music to your Spotify account.
+Save [Pitchfork](http://pitchfork.com/)'s [Best New Music](http://pitchfork.com/reviews/best/albums/) to your [Spotify](https://www.spotify.com/) account.
 
 * Create a [Spotify application](https://developer.spotify.com/my-applications/#!/applications)
 * Add Redirect URIs to your Spotify application
