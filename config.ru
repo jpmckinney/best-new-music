@@ -104,7 +104,7 @@ __END__
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 </head>
 <body>
-<div style="margin-top: 5%; text-align: center;">
+<div class="container" style="margin-top: 5%; text-align: center;">
 <%= yield %>
 </div>
 </div>
@@ -112,7 +112,9 @@ __END__
 </html>
 
 @@index
-<a href="/auth/spotify" class="btn btn-primary btn-lg">Save Pitchfork's Best New Albums to Spotify</a>
+<p><a href="/auth/spotify" class="btn btn-primary btn-lg">Save Pitchfork's Best New Albums to Spotify</a></p>
+<p class="text-danger">There is no undo.</p>
+<p class="text-muted">This software is provided "as is", without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose and noninfringement. In no event shall the authors or copyright holders be liable for any claim, damages or other liability, whether in an action of contract, tort or otherwise, arising from, out of or in connection with the software or the use or other dealings in the software.</p>
 
 @@callback
 <div class="alert alert-success">Success!</div>
