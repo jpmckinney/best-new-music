@@ -8,6 +8,8 @@ Save [Pitchfork](http://pitchfork.com/)'s [Best New Music](http://pitchfork.com/
   * The Heroku app's callback URL
 * Remember to click "Save"
 
+The application can either run locally or publicly. You can edit [`config.ru`](https://github.com/jpmckinney/best_new_music/blob/master/config.ru#L35) to instead add [Best New Tracks](http://pitchfork.com/reviews/best/tracks/) or [Best New Reissues](http://pitchfork.com/reviews/best/reissues/), or to add previous year's albums.
+
 ```
 heroku create
 heroku config:set SPOTIFY_CLIENT_ID=3095ac09efb0341219c195851618e656
