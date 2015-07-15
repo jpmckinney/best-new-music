@@ -18,7 +18,4 @@ heroku config:set SECRET_TOKEN=1c40ae179230d9680b45ce63e8a9e314977bf6b15ab65ef37
 git push heroku master
 ```
 
-The application log will `WARN` if any albums can't be found on Spotify. You can edit [`config.ru`](https://github.com/jpmckinney/best_new_music/blob/master/config.ru#L35) to instead add [Best New Tracks](http://pitchfork.com/reviews/best/tracks/) or [Best New Reissues](http://pitchfork.com/reviews/best/reissues/), or to add previous year's albums.
-
-
 Copyright (c) 2015 James McKinney, released under the MIT license
