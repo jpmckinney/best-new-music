@@ -3,6 +3,8 @@ ruby '2.2.0'
 
 gem 'faraday'
 gem 'nokogiri'
+gem 'pg'
 gem 'rspotify'
+gem 'sequel'
 gem 'sinatra'
 gem 'sinatra-contrib'
