@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.2.0'
 
+gem 'carmen-demonyms'
 gem 'faraday'
 gem 'nokogiri'
 gem 'pg'
