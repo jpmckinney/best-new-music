@@ -12,7 +12,7 @@ To deploy your own app, you need to know a little about programming and Heroku.
   * The Heroku app's callback URL, e.g. `https://myapp.herokuapp.com/auth/spotify/callback`
 1. Remember to click "Save"
 
-## Getting Started
+## Local deployment
 
 Replace the example values of `SPOTIFY_MARKET`, `SPOTIFY_CLIENT_ID`, `SPOTIFY_CLIENT_SECRET` and `SECRET_TOKEN`.
 
@@ -27,7 +27,7 @@ Replace the example values of `SPOTIFY_MARKET`, `SPOTIFY_CLIENT_ID`, `SPOTIFY_CL
     rake spotify
     rackup
 
-## Deployment
+## Heroku deployment
 
 Replace the example values of `SPOTIFY_MARKET`, `SPOTIFY_CLIENT_ID`, `SPOTIFY_CLIENT_SECRET` and `SECRET_TOKEN`.
 
