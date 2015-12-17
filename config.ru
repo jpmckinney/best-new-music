@@ -79,7 +79,11 @@ post '/search' do
 
     JSON.dump(response)
   rescue RestClient::BadRequest => e
-    p e
+    if JSON.parse(e.http_body)['error'] == 'invalid_client'
+      redirect '/sign_out'
+    else
+      raise
+    end
   end
 end
 
