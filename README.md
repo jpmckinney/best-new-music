@@ -1,13 +1,15 @@
 ## Pitchfork: Best New Music
 
-Save [Pitchfork](http://pitchfork.com/)'s [Best New Music](http://pitchfork.com/reviews/best/albums/) to your [Spotify](https://www.spotify.com/) account.
+Saves [Pitchfork](http://pitchfork.com/)'s [Best New Music](http://pitchfork.com/reviews/best/albums/) to your [Spotify](https://www.spotify.com/) account.
+
+To deploy your own app, you need to know a little about programming and Heroku.
 
 ## Setup Spotify
 
 1. Create a [Spotify application](https://developer.spotify.com/my-applications/#!/applications)
-1. Add Redirect URIs to your Spotify application:
+1. Add these Redirect URIs to your Spotify application:
   * `http://localhost:9292/auth/spotify/callback`
-  * The Heroku app's callback URL (optional)
+  * The Heroku app's callback URL (optional), e.g. `https://myapp.herokuapp.com/auth/spotify/callback`
 1. Remember to click "Save"
 
 ## Getting Started

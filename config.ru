@@ -163,7 +163,7 @@ $(function () {
 @@sign_in
 <p>Press the button to authorize this app to modify your Spotify library.</p>
 <p><a href="/auth/spotify" class="btn btn-primary btn-lg">Log in with Spotify</a></p>
-<p>This app is configured for the <strong><%= demonym %></strong> market. If it doesn't work in your market, <a href="https://github.com/jpmckinney/best_new_music">deploy your own app</a>.</p>
+<p>This app is configured for the <strong><%= demonym %></strong> market. Try it, but if it doesn't work in your market, <a href="https://github.com/jpmckinney/best_new_music#readme">deploy your own app</a>.</p>
 <p class="text-muted">This is the same as the "Log in with Google" or "Log in with Facebook" buttons that you see everywhere.</p>
 
 @@index
@@ -194,6 +194,6 @@ $(function () {
 
 <footer style="margin-top: 40px">
   <p class="text-danger"><strong>There is no undo.</strong></p>
-  <p>This app is configured for the <strong><%= demonym %></strong> market. If it doesn't work in your market, <a href="https://github.com/jpmckinney/best_new_music">deploy your own app</a>.</p>
+  <p>This app is configured for the <strong><%= demonym %></strong> market. Try it, but if it doesn't work in your market, <a href="https://github.com/jpmckinney/best_new_music#readme">deploy your own app</a>.</p>
   <p class="text-muted">This software is provided "as is", without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose and noninfringement. In no event shall the authors or copyright holders be liable for any claim, damages or other liability, whether in an action of contract, tort or otherwise, arising from, out of or in connection with the software or the use or other dealings in the software.</p>
 </footer>
