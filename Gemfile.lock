@@ -29,7 +29,7 @@ GEM
     multi_xml (0.5.5)
     multipart-post (2.0.0)
     netrc (0.10.3)
-    nokogiri (1.6.7.1)
+    nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
     oauth2 (1.0.0)
       faraday (>= 0.8, < 0.10)
@@ -90,4 +90,4 @@ DEPENDENCIES
   sinatra-contrib
 
 BUNDLED WITH
-   1.10.6
+   1.11.2
