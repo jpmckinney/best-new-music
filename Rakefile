@@ -82,8 +82,16 @@ task :spotify do
       gsub('’', "'").
       # Remove trailing "EP".
       sub(/ ep\z/, '').
+      # Remove trailing periods.
+      sub(/\.+\z/, '').
+      # Remove versions and editions.
+      sub(/ \((?:deluxe|(?:deluxe|special) edition)\)/i, '')
+  end
+
+  def clean_artist_name(name)
+    name.downcase.
       # Remove periods, e.g. "Anderson .Paak".
-      gsub(/\./, '').
+      gsub(/\.+/, '').
       # Remove versions and editions.
       sub(/ \((?:(?:deluxe|special) edition)\)/i, '')
   end
@@ -104,8 +112,10 @@ task :spotify do
     end
 
     # Reject mismatches.
+    clean_pitchfork_album_name = clean_album_name(record.album_name)
+    clean_pitchfork_artist_name = clean_artist_name(record.artist_name)
     albums.reject! do |album|
-      clean_album_name(album.name) != clean_album_name(record.album_name) || album.artists[0].name.downcase != record.artist_name.downcase
+      clean_album_name(album.name) != clean_pitchfork_album_name || clean_artist_name(album.artists[0].name) != clean_pitchfork_artist_name
     end
 
     # Reject non-explicit albums.
