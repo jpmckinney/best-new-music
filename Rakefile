@@ -82,10 +82,10 @@ task :spotify do
       gsub('’', "'").
       # Remove trailing "EP".
       sub(/ ep\z/, '').
-      # Remove trailing periods.
-      sub(/\.+\z/, '').
+      # Remove periods, e.g. "Anderson .Paak".
+      gsub(/\./, '').
       # Remove versions and editions.
-      sub(/ \(deluxe version|special edition\)/, '')
+      sub(/ \((?:(?:deluxe|special) edition)\)/i, '')
   end
 
   Album.where(spotify_id: nil).reverse_order(:created_at).each do |record|
