@@ -182,7 +182,7 @@ $(function () {
   <div class="form-group">
     from
     <select id="year" name="year" class="form-control">
-      <% Time.now.year.downto(Time.now.year) do |year| %>
+      <% Time.now.year.downto(2015) do |year| %>
         <option value="<%= year %>"><%= year %></option>
       <% end %>
     </select>
