@@ -2,9 +2,8 @@ require 'rubygems'
 require 'bundler/setup'
 
 require 'json'
+require 'open-uri'
 
-require 'faraday'
-require 'nokogiri'
 require 'rspotify'
 require 'sequel'
 
@@ -28,23 +27,26 @@ end
 
 task :pitchfork do
   year = Time.now.year
+  per_page = 50
 
-  %w(albums reissues).each do |kind|
+  %w(bnm bnr).each do |kind|  # best new album, best new reissue
     last = Album.where(kind: kind).reverse_order(:created_at).first
 
-    page = 1
+    offset = 0
 
     loop do
-      url = "http://pitchfork.com/reviews/best/#{kind}/#{page}/"
+      url = "http://pitchfork.com/api/v1/albumreviews/?limit=#{per_page}&offset=#{offset}&#{kind}=1"
 
-      Nokogiri::HTML(Faraday.get(url).body).xpath('//ul[contains(@class,"bnm-list")]//div[@class="info"]').each do |div|
-        if Integer(div.xpath('.//h4').text[/\b\d{4}\b/]) != year
+      JSON.load(open(url).read)['results'].each do |result|
+        album = result['tombstone']['albums'][0]
+
+        if album['labels_and_years'][0]['year'] != year
           # Don't go beyond the present year.
           exit
         end
 
-        artist_name = div.xpath('.//h1').text
-        album_name = div.xpath('.//h2').text
+        artist_name = album['album']['artists'][0]['display_name']
+        album_name = album['album']['display_name']
 
         attributes = {
           kind: kind,
@@ -62,7 +64,7 @@ task :pitchfork do
         end
       end
 
-      page += 1
+      offset += per_page
     end
   end
 end
@@ -84,6 +86,8 @@ task :spotify do
       sub(/ ep\z/, '').
       # Remove trailing periods.
       sub(/\.+\z/, '').
+      # Remove periods, e.g. "Sept. 5th".
+      gsub(/\.+/, '').
       # Remove versions and editions.
       sub(/ \((?:deluxe|(?:deluxe|special) edition)\)/i, '')
   end
@@ -121,6 +125,11 @@ task :spotify do
     # Reject non-explicit albums.
     if albums.any?{|album| album.tracks.any?(&:explicit)}
       albums.reject!{|album| album.tracks.none?(&:explicit)}
+    end
+
+    # Reject non-deluxe albums.
+    if albums.any?{|album| album.name['(Deluxe Edition)']}
+      albums.reject!{|album| !album.name['(Deluxe Edition)']}
     end
 
     # Prepare the attributes.
