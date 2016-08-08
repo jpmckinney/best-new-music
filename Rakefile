@@ -29,13 +29,16 @@ task :pitchfork do
   year = Time.now.year
   per_page = 50
 
-  %w(bnm bnr).each do |kind|  # best new album, best new reissue
+  {
+    'albums' => 'bnm',
+    'reissues' => 'bnr',
+  }.each do |kind,parameter|
     last = Album.where(kind: kind).reverse_order(:created_at).first
 
     offset = 0
 
     loop do
-      url = "http://pitchfork.com/api/v1/albumreviews/?limit=#{per_page}&offset=#{offset}&#{kind}=1"
+      url = "http://pitchfork.com/api/v1/albumreviews/?limit=#{per_page}&offset=#{offset}&#{parameter}=1"
 
       JSON.load(open(url).read)['results'].each do |result|
         album = result['tombstone']['albums'][0]
