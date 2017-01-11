@@ -150,7 +150,7 @@ $(function () {
     $.each(data, function (i, album) {
       albums.append(
         '<div class="checkbox">' +
-          '<label><input type="checkbox" name="spotify_id[]" value="' + album.spotify_id + '"' + (album.saved === true ? ' checked disabled' : '') + '>' + album.display_name + '</label> <span class="text-muted">' + album.country_name + '</span>' +
+          '<label><input type="checkbox" name="spotify_id[]" value="' + album.spotify_id + '"' + (album.saved === true ? ' checked disabled' : '') + '>' + album.display_name + '</label> <span class="text-muted">' + (album.country_name || '') + '</span>' +
         '</div>'
       );
     });
