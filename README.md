@@ -43,6 +43,6 @@ Replace the example values of `SPOTIFY_MARKET`, `SPOTIFY_CLIENT_ID`, `SPOTIFY_CL
     heroku run rake spotify
     heroku open
 
-Add `rake pitchfork && rake spotify` to the Heroku Scheduler.
+Add `rake pitchfork && rake spotify && rake country` to the Heroku Scheduler.
 
 Copyright (c) 2015 James McKinney, released under the MIT license

@@ -4,10 +4,17 @@ require 'bundler/setup'
 require 'json'
 require 'open-uri'
 
+require 'musicbrainz'
 require 'rspotify'
 require 'sequel'
 
 require_relative 'database'
+
+MusicBrainz.configure do |c|
+  c.app_name = 'best-new-albums'
+  c.app_version = '1.0'
+  c.contact = 'james@slashpoundbang.com'
+end
 
 task :setup do
   DB.create_table :albums do
@@ -18,6 +25,7 @@ task :setup do
     String :album_name
     String :spotify_id, index: true
     String :display_name
+    String :country_name
     String :log
     DateTime :created_at, index: true
 
@@ -69,6 +77,18 @@ task :pitchfork do
 
       offset += per_page
     end
+  end
+end
+
+task :country do
+  Album.where(country_name: nil).reverse_order(:created_at).each do |record|
+    artist = MusicBrainz::Artist.find_by_name(record.artist_name)
+    if artist
+      record.update(country_name: artist.country)
+    else
+      puts "Not found: #{record.artist_name}"
+    end
+    print '.'
   end
 end
 

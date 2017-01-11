@@ -72,6 +72,7 @@ post '/search' do
       response << {
         spotify_id: record.spotify_id,
         display_name: record.display_name,
+        country_name: record.country_name,
         saved: current_user.saved_tracks?(albums.fetch(record.spotify_id).tracks).all?,
       }
 
@@ -149,7 +150,7 @@ $(function () {
     $.each(data, function (i, album) {
       albums.append(
         '<div class="checkbox">' +
-          '<label><input type="checkbox" name="spotify_id[]" value="' + album.spotify_id + '"' + (album.saved === true ? ' checked disabled' : '') + '>' + album.display_name + '</label>' +
+          '<label><input type="checkbox" name="spotify_id[]" value="' + album.spotify_id + '"' + (album.saved === true ? ' checked disabled' : '') + '>' + album.display_name + '</label> <span class="text-muted">' + album.country_name + '</span>' +
         '</div>'
       );
     });
