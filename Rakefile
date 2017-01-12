@@ -80,18 +80,6 @@ task :pitchfork do
   end
 end
 
-task :country do
-  Album.where(country_name: nil).reverse_order(:created_at).each do |record|
-    artist = MusicBrainz::Artist.find_by_name(record.artist_name)
-    if artist
-      record.update(country_name: artist.country)
-    else
-      puts "Not found: #{record.artist_name}"
-    end
-    print '.'
-  end
-end
-
 task :spotify do
   # Returns the album as a string.
   #
@@ -187,5 +175,17 @@ task :spotify do
       display_name: display_name,
       log: log.join("\n"),
     })
+  end
+end
+
+task :country do
+  Album.where(country_name: nil).reverse_order(:created_at).each do |record|
+    artist = MusicBrainz::Artist.find_by_name(record.artist_name)
+    if artist
+      record.update(country_name: artist.country)
+    else
+      puts "Not found: #{record.artist_name}"
+    end
+    print '.'
   end
 end
