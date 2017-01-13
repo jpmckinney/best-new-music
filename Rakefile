@@ -5,6 +5,7 @@ require 'json'
 require 'open-uri'
 
 require 'musicbrainz'
+require 'nokogiri'
 require 'rspotify'
 require 'sequel'
 
@@ -187,5 +188,78 @@ task :country do
       puts "Not found: #{record.artist_name}"
     end
     print '.'
+  end
+end
+
+task :imposter_xml do
+  guids_of_episodes_without_music = [
+    '9dadb302244c19810b665c46ad82cf2e', # The Imposter
+    '2c3c04213cab4e6be414b2ea2f121aca', # Ep. 0 - Who Is The Imposter?
+    '3d02eda14680f9e81f707591e1d6d404', # Tanya Tagaq teaser
+  ]
+
+  track_name_and_artist_name_re = /([^"“]+?)["”]? (?:from|by) ([^,.]+)/
+
+  tracks_by_episode = {}
+
+  Nokogiri::XML(open('http://imposter.libsyn.com/rss').read).xpath('//item').each do |item|
+    guid = item.at_xpath('./guid').text
+    title = item.at_xpath('./title').text
+    description = item.at_xpath('./description').text
+
+    unless guids_of_episodes_without_music.include?(guid)
+      tracks_by_episode[title] = []
+      detail = Nokogiri::HTML(description)
+
+      marker = detail.xpath('//p[contains(., "on this episode:")]|//p[contains(., "on this show:")]')
+
+      if marker.one?
+        items = marker[0].xpath('./following-sibling::*').take_while{|node| node.text != ' '} # non-breaking space
+
+        if items.any?
+          items.each do |item|
+            track_name_and_artist_name = item.text.gsub(/\p{Space}+/, ' ').strip.match(track_name_and_artist_name_re)
+
+            if track_name_and_artist_name
+              tracks_by_episode[title] << {
+                track_name: track_name_and_artist_name[1],
+                artist_name: track_name_and_artist_name[2],
+              }
+            else
+              $stderr.puts "Can't parse in #{title}: #{item.text}\n\n"
+            end
+          end
+        else
+          $stderr.puts "No songs in #{title}:\n#{description}\n\n"
+        end
+      else
+        items = detail.text.match(/\D(\d\..+?)(?:The producer of )?The Imposter is/)
+
+        if items
+          items[1].split(/\d\./).drop(1).each do |item|
+            track_name_and_artist_name = item.gsub(/\p{Space}+/, ' ').strip.match(track_name_and_artist_name_re)
+
+            if track_name_and_artist_name
+              tracks_by_episode[title] << {
+                track_name: track_name_and_artist_name[1],
+                artist_name: track_name_and_artist_name[2],
+              }
+            end
+          end
+        else
+          $stderr.puts "No match in #{title}:\n#{description}\n\n"
+        end
+      end
+    end
+  end
+
+  tracks_by_episode.each do |title,tracks|
+    puts title
+    tracks.each do |track|
+      artist = MusicBrainz::Artist.find_by_name(track[:artist_name])
+      country_name = artist ? (artist.country.empty? ? '-' : artist.country) : '?'
+      puts "#{track[:artist_name]}: #{track[:track_name]} (#{country_name})"
+    end
+    puts
   end
 end

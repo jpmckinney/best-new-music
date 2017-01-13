@@ -3,6 +3,7 @@ ruby '2.2.0'
 
 gem 'carmen-demonyms'
 gem 'musicbrainz'
+gem 'nokogiri'
 gem 'pg'
 gem 'rake'
 gem 'rspotify'

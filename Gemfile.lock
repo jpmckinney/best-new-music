@@ -86,6 +86,7 @@ PLATFORMS
 DEPENDENCIES
   carmen-demonyms
   musicbrainz
+  nokogiri
   pg
   rake
   rspotify
