@@ -32,7 +32,7 @@ GEM
       faraday
       nokogiri
     netrc (0.10.3)
-    nokogiri (1.6.8.1)
+    nokogiri (1.7.0.1)
       mini_portile2 (~> 2.1.0)
     oauth2 (1.0.0)
       faraday (>= 0.8, < 0.10)
